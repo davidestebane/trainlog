@@ -71,6 +71,7 @@
   .sync-status.saved{color:var(--success);border-color:rgba(0,204,102,.3);}
   .sync-status.saving{color:var(--muted);border-color:var(--border);}
   .sync-status.error{color:var(--error);border-color:rgba(255,68,68,.3);}
+  .sync-dot{display:none;width:8px;height:8px;border-radius:50%;flex-shrink:0;}
   .btn-logout{
     background:none;border:1px solid var(--border);color:var(--muted);
     font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;
@@ -158,8 +159,14 @@
   @media(max-width:900px){
     .main{grid-template-columns:1fr;}
     .sidebar{border-right:none;border-bottom:1px solid var(--border);}
-    header{padding:16px 20px;}
+    header{padding:14px 20px;align-items:center;}
     .content{padding:20px;}
+    .tagline{display:none;}
+    .user-email{display:none;}
+    .sync-status{display:none;}
+    .sync-dot{display:block;}
+    .logo{font-size:34px;}
+    .header-right{gap:10px;}
   }
 </style>
 </head>
@@ -200,6 +207,7 @@
     <div class="header-right">
       <div class="user-email" id="userEmail"></div>
       <div class="sync-status saved" id="syncStatus">● GUARDADO</div>
+      <div class="sync-dot" id="syncDot" style="background:var(--success)"></div>
       <button class="btn-logout" onclick="logout()">SALIR</button>
     </div>
   </header>
@@ -433,11 +441,17 @@ function scheduleSave() {
 }
 
 function setSyncStatus(s) {
-  const el = document.getElementById('syncStatus');
-  const map = { saving:['● GUARDANDO...','saving'], saved:['● GUARDADO','saved'], error:['● ERROR AL GUARDAR','error'] };
-  const [txt, cls] = map[s];
-  el.textContent = txt;
-  el.className = `sync-status ${cls}`;
+  const el  = document.getElementById('syncStatus');
+  const dot = document.getElementById('syncDot');
+  const map = {
+    saving: ['● GUARDANDO...', 'saving', 'var(--muted)'],
+    saved:  ['● GUARDADO',     'saved',  'var(--success)'],
+    error:  ['● ERROR',        'error',  'var(--error)'],
+  };
+  const [txt, cls, dotColor] = map[s];
+  el.textContent  = txt;
+  el.className    = `sync-status ${cls}`;
+  if (dot) dot.style.background = dotColor;
 }
 
 // ─── SHOW APP ─────────────────────────────────────────────────────────────────
