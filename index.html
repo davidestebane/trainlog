@@ -19,46 +19,47 @@
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
   }
 
-  /* ── AUTH SCREEN ── */
-  #authScreen{
-    display:flex;align-items:center;justify-content:center;
-    min-height:100vh;padding:20px;
+  /* ── SETUP SCREEN ── */
+  #setupScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;}
+  .setup-box{width:100%;max-width:420px;border:1px solid var(--border);background:var(--surface);padding:40px 36px;}
+  .setup-logo{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:4px;color:var(--accent);margin-bottom:4px;}
+  .setup-logo span{color:var(--text);}
+  .setup-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;}
+
+  .setup-steps{display:flex;flex-direction:column;gap:16px;margin-bottom:28px;}
+  .step{display:flex;gap:14px;align-items:flex-start;}
+  .step-num{
+    width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);
+    font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--accent);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
   }
-  .auth-box{
-    width:100%;max-width:380px;
-    border:1px solid var(--border);background:var(--surface);
-    padding:40px 36px;
-  }
-  .auth-logo{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:4px;color:var(--accent);margin-bottom:4px;}
-  .auth-logo span{color:var(--text);}
-  .auth-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:32px;}
-  .auth-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:28px;}
-  .auth-tab{
-    flex:1;padding:10px;background:none;border:none;color:var(--muted);
-    font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;
-    text-transform:uppercase;cursor:pointer;transition:color .15s;border-bottom:2px solid transparent;margin-bottom:-1px;
-  }
-  .auth-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+  .step-text{font-size:13px;color:var(--muted);line-height:1.5;}
+  .step-text a{color:var(--accent);text-decoration:none;}
+  .step-text a:hover{text-decoration:underline;}
+  .step-text strong{color:var(--text);}
+
   .field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
   .field label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
   .field input{
     background:var(--surface2);border:1px solid var(--border);color:var(--text);
-    font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 12px;outline:none;
+    font-family:'DM Mono',monospace;font-size:13px;padding:10px 12px;outline:none;
     transition:border-color .15s;
   }
   .field input:focus{border-color:var(--accent);}
+  .field input::placeholder{color:#333;}
   .btn-primary{
     width:100%;padding:12px;background:var(--accent);color:#000;border:none;
     font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;
-    cursor:pointer;transition:opacity .15s;margin-top:8px;
+    cursor:pointer;transition:opacity .15s;
   }
   .btn-primary:hover{opacity:.85;}
   .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
-  .auth-msg{font-family:'DM Mono',monospace;font-size:11px;margin-top:14px;text-align:center;min-height:18px;}
-  .auth-msg.error{color:var(--error);}
-  .auth-msg.success{color:var(--success);}
+  .setup-msg{font-family:'DM Mono',monospace;font-size:11px;margin-top:14px;text-align:center;min-height:18px;}
+  .setup-msg.error{color:var(--error);}
+  .setup-msg.success{color:var(--success);}
+  .setup-msg.loading{color:var(--muted);}
 
-  /* ── MAIN APP ── */
+  /* ── APP SCREEN ── */
   #appScreen{display:none;}
   header{padding:24px 44px 20px;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--border);}
   .header-left{display:flex;align-items:flex-end;gap:14px;}
@@ -66,17 +67,12 @@
   .logo span{color:var(--text);}
   .tagline{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding-bottom:6px;}
   .header-right{display:flex;align-items:center;gap:12px;}
-  .user-email{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;}
   .sync-status{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;padding:3px 8px;border:1px solid;}
   .sync-status.saved{color:var(--success);border-color:rgba(0,204,102,.3);}
   .sync-status.saving{color:var(--muted);border-color:var(--border);}
   .sync-status.error{color:var(--error);border-color:rgba(255,68,68,.3);}
   .sync-dot{display:none;width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-  .btn-logout{
-    background:none;border:1px solid var(--border);color:var(--muted);
-    font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;
-    padding:5px 10px;cursor:pointer;transition:all .15s;
-  }
+  .btn-logout{background:none;border:1px solid var(--border);color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:5px 10px;cursor:pointer;transition:all .15s;}
   .btn-logout:hover{border-color:var(--error);color:var(--error);}
 
   .main{display:grid;grid-template-columns:290px 1fr;min-height:calc(100vh - 82px);}
@@ -84,7 +80,6 @@
   .content{padding:28px 36px;display:flex;flex-direction:column;gap:24px;overflow-y:auto;}
 
   .sec-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
-
   .stepper{display:flex;align-items:center;border:1px solid var(--border);width:fit-content;}
   .stepper button{width:32px;height:32px;background:var(--surface2);border:none;color:var(--text);font-size:17px;cursor:pointer;transition:background .15s;}
   .stepper button:hover{background:var(--border);}
@@ -162,7 +157,6 @@
     header{padding:14px 20px;align-items:center;}
     .content{padding:20px;}
     .tagline{display:none;}
-    .user-email{display:none;}
     .sync-status{display:none;}
     .sync-dot{display:block;}
     .logo{font-size:34px;}
@@ -172,28 +166,41 @@
 </head>
 <body>
 
-<!-- ── AUTH SCREEN ── -->
-<div id="authScreen">
-  <div class="auth-box">
-    <div class="auth-logo">TRAIN<span>LOG</span></div>
-    <div class="auth-sub">Progressive Calisthenics · RFEM System</div>
+<!-- ── SETUP SCREEN ── -->
+<div id="setupScreen">
+  <div class="setup-box">
+    <div class="setup-logo">TRAIN<span>LOG</span></div>
+    <div class="setup-sub">Sincronización con JSONBin</div>
 
-    <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchTab('login')">Iniciar sesión</button>
-      <button class="auth-tab" onclick="switchTab('signup')">Crear cuenta</button>
+    <div class="setup-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          Entrá a <a href="https://jsonbin.io" target="_blank">jsonbin.io</a> y creá una cuenta gratis.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          En el dashboard, ir a <strong>API Keys</strong> y copiá tu <strong>Master Key</strong>.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          Pegala acá abajo. La primera vez se crea tu bin automáticamente. En cualquier dispositivo nuevo usás la misma key.
+        </div>
+      </div>
     </div>
 
     <div class="field">
-      <label>Email</label>
-      <input type="email" id="authEmail" placeholder="tu@email.com" onkeydown="if(event.key==='Enter')authSubmit()">
-    </div>
-    <div class="field">
-      <label>Contraseña</label>
-      <input type="password" id="authPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter')authSubmit()">
+      <label>Tu Master Key de JSONBin</label>
+      <input type="password" id="apiKeyInput" placeholder="$2a$10$..." autocomplete="off"
+        onkeydown="if(event.key==='Enter')connect()">
     </div>
 
-    <button class="btn-primary" id="authBtn" onclick="authSubmit()">ENTRAR</button>
-    <div class="auth-msg" id="authMsg"></div>
+    <button class="btn-primary" id="connectBtn" onclick="connect()">CONECTAR</button>
+    <div class="setup-msg" id="setupMsg"></div>
   </div>
 </div>
 
@@ -205,10 +212,9 @@
       <div class="tagline">Progressive Calisthenics · RFEM System</div>
     </div>
     <div class="header-right">
-      <div class="user-email" id="userEmail"></div>
       <div class="sync-status saved" id="syncStatus">● GUARDADO</div>
       <div class="sync-dot" id="syncDot" style="background:var(--success)"></div>
-      <button class="btn-logout" onclick="logout()">SALIR</button>
+      <button class="btn-logout" onclick="disconnect()">SALIR</button>
     </div>
   </header>
 
@@ -236,12 +242,10 @@
           </div>
         </div>
       </div>
-
       <div>
         <div class="sec-label">Semana actual</div>
         <div class="week-grid" id="weekGrid"></div>
       </div>
-
       <div style="flex:1">
         <div class="sec-label">Ejercicios y máximos</div>
         <div id="exEditor"></div>
@@ -271,112 +275,124 @@
 </div>
 
 <script>
-// ─── SUPABASE CONFIG ─────────────────────────────────────────────────────────
-const SUPABASE_URL = 'https://gtttktrvywvfdkdkghay.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd0dHRrdHJ2eXd2ZmRrZGtnaGF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyNzgxMzgsImV4cCI6MjA4ODg1NDEzOH0.81rPC-uW7QxSd0WF0ajPHwsRHgBG2l_Xhpp3bF-ICdQ';
+// ─── JSONBIN ──────────────────────────────────────────────────────────────────
+const JSONBIN_BASE = 'https://api.jsonbin.io/v3';
 
-async function sbFetch(path, options={}) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
-    ...options,
+async function binCreate(apiKey, data) {
+  const res = await fetch(`${JSONBIN_BASE}/b`, {
+    method: 'POST',
     headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
       'Content-Type': 'application/json',
-      'Prefer': 'return=representation',
-      ...(options.headers||{})
-    }
+      'X-Master-Key': apiKey,
+      'X-Bin-Name': 'trainlog',
+      'X-Bin-Private': 'true',
+    },
+    body: JSON.stringify(data),
   });
-  if (!res.ok) {
-    const err = await res.json().catch(()=>({}));
-    throw new Error(err.message || res.statusText);
-  }
-  return res.status === 204 ? null : res.json();
+  if (!res.ok) throw new Error('No se pudo crear el bin. Verificá tu Master Key.');
+  const json = await res.json();
+  return json.metadata.id;
 }
 
-// ─── PASSWORD HASHING (simple SHA-256) ───────────────────────────────────────
-async function hashPassword(password) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-
-// ─── AUTH STATE ───────────────────────────────────────────────────────────────
-let currentEmail = localStorage.getItem('tl_email') || null;
-
-// ─── AUTH UI ──────────────────────────────────────────────────────────────────
-let authMode = 'login';
-
-function switchTab(mode) {
-  authMode = mode;
-  document.querySelectorAll('.auth-tab').forEach((t,i) => {
-    t.classList.toggle('active', (i===0 && mode==='login') || (i===1 && mode==='signup'));
+async function binRead(apiKey, binId) {
+  const res = await fetch(`${JSONBIN_BASE}/b/${binId}/latest`, {
+    headers: { 'X-Master-Key': apiKey },
   });
-  document.getElementById('authBtn').textContent = mode === 'login' ? 'ENTRAR' : 'CREAR CUENTA';
-  setAuthMsg('', '');
+  if (!res.ok) throw new Error('No se pudo leer el bin.');
+  const json = await res.json();
+  return json.record;
 }
 
-function setAuthMsg(msg, type='') {
-  const el = document.getElementById('authMsg');
+async function binWrite(apiKey, binId, data) {
+  const res = await fetch(`${JSONBIN_BASE}/b/${binId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Master-Key': apiKey,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('No se pudo guardar.');
+}
+
+// ─── LOCAL CREDENTIALS ────────────────────────────────────────────────────────
+function getCreds() {
+  const k = localStorage.getItem('tl_key');
+  const b = localStorage.getItem('tl_bin');
+  return k && b ? { key: k, binId: b } : null;
+}
+function saveCreds(key, binId) {
+  localStorage.setItem('tl_key', key);
+  localStorage.setItem('tl_bin', binId);
+}
+function clearCreds() {
+  localStorage.removeItem('tl_key');
+  localStorage.removeItem('tl_bin');
+}
+
+// ─── SETUP FLOW ───────────────────────────────────────────────────────────────
+function setSetupMsg(msg, type='') {
+  const el = document.getElementById('setupMsg');
   el.textContent = msg;
-  el.className = 'auth-msg' + (type ? ` ${type}` : '');
+  el.className = 'setup-msg' + (type ? ` ${type}` : '');
 }
 
-async function authSubmit() {
-  const email    = document.getElementById('authEmail').value.trim().toLowerCase();
-  const password = document.getElementById('authPassword').value;
-  const btn      = document.getElementById('authBtn');
+async function connect() {
+  const apiKey = document.getElementById('apiKeyInput').value.trim();
+  if (!apiKey) return setSetupMsg('Pegá tu Master Key primero.', 'error');
 
-  if (!email || !password) return setAuthMsg('Completá los dos campos.', 'error');
-  if (password.length < 6)  return setAuthMsg('La contraseña necesita al menos 6 caracteres.', 'error');
-
+  const btn = document.getElementById('connectBtn');
   btn.disabled = true;
-  setAuthMsg('Verificando...', '');
+  setSetupMsg('Conectando...', 'loading');
 
   try {
-    const hash = await hashPassword(password);
+    // Try to find existing bin named "trainlog"
+    const listRes = await fetch(`${JSONBIN_BASE}/b?private=true`, {
+      headers: { 'X-Master-Key': apiKey },
+    });
 
-    if (authMode === 'signup') {
-      // Check if account exists
-      const existing = await sbFetch(`accounts?email=eq.${encodeURIComponent(email)}&select=email`);
-      if (existing.length > 0) {
-        setAuthMsg('Ya existe una cuenta con ese email.', 'error');
-        btn.disabled = false; return;
-      }
-      // Create account
-      await sbFetch('accounts', { method:'POST', body: JSON.stringify({ email, password_hash: hash }) });
-      // Create empty user_data
-      await sbFetch('user_data', { method:'POST', body: JSON.stringify({ email, data: getDefaultState() }) });
-      setAuthMsg('¡Cuenta creada! Iniciando sesión...', 'success');
-      await new Promise(r=>setTimeout(r,800));
+    let binId = null;
+
+    if (listRes.ok) {
+      const bins = await listRes.json();
+      // Look for an existing trainlog bin
+      const existing = Array.isArray(bins)
+        ? bins.find(b => b.record?.snippetMeta?.name === 'trainlog' || b.snippetMeta?.name === 'trainlog')
+        : null;
+      if (existing) binId = existing.record?.id || existing.id;
     }
 
-    // Login: verify
-    const rows = await sbFetch(`accounts?email=eq.${encodeURIComponent(email)}&password_hash=eq.${hash}&select=email`);
-    if (rows.length === 0) {
-      setAuthMsg('Email o contraseña incorrectos.', 'error');
-      btn.disabled = false; return;
+    if (binId) {
+      // Load existing data
+      setSetupMsg('Cargando tus datos...', 'loading');
+      const data = await binRead(apiKey, binId);
+      state = { ...getDefaultState(), ...data };
+      if (!state.exercises) state.exercises = getDefaultState().exercises;
+    } else {
+      // First time: create bin with defaults
+      setSetupMsg('Primera vez detectada, creando tu bin...', 'loading');
+      binId = await binCreate(apiKey, getDefaultState());
+      state = getDefaultState();
     }
 
-    // ✅ Logged in
-    currentEmail = email;
-    localStorage.setItem('tl_email', email);
-    await loadUserData();
+    saveCreds(apiKey, binId);
+    setSetupMsg('¡Conectado!', 'success');
+    await new Promise(r => setTimeout(r, 500));
     showApp();
 
   } catch(e) {
-    setAuthMsg('Error: ' + e.message, 'error');
+    setSetupMsg(e.message || 'Error al conectar.', 'error');
     btn.disabled = false;
   }
 }
 
-function logout() {
-  currentEmail = null;
-  localStorage.removeItem('tl_email');
+function disconnect() {
+  clearCreds();
   document.getElementById('appScreen').style.display = 'none';
-  document.getElementById('authScreen').style.display = 'flex';
-  document.getElementById('authEmail').value = '';
-  document.getElementById('authPassword').value = '';
-  document.getElementById('authBtn').disabled = false;
-  setAuthMsg('', '');
+  document.getElementById('setupScreen').style.display = 'flex';
+  document.getElementById('apiKeyInput').value = '';
+  document.getElementById('connectBtn').disabled = false;
+  setSetupMsg('', '');
 }
 
 // ─── DATA DEFAULTS ────────────────────────────────────────────────────────────
@@ -390,13 +406,13 @@ function getDefaultState() {
         { name:'Ring Dips',        max:9  },
       ],
       pull: [
-        { name:'Pull Ups',         max:8  },
-        { name:'Rows',             max:9  },
-        { name:'NG Chin Ups',      max:8  },
+        { name:'Pull Ups',  max:8 },
+        { name:'Rows',      max:9 },
+        { name:'NG Chin Ups', max:8 },
       ],
       leg: [
-        { name:'Squats',           max:20 },
-        { name:'Lunges',           max:20 },
+        { name:'Squats',  max:20 },
+        { name:'Lunges',  max:20 },
       ],
     }
   };
@@ -404,42 +420,17 @@ function getDefaultState() {
 
 let state = getDefaultState();
 
-// ─── SUPABASE SYNC ───────────────────────────────────────────────────────────
+// ─── CLOUD SYNC ───────────────────────────────────────────────────────────────
 let saveTimer = null;
 
-async function loadUserData() {
-  const rows = await sbFetch(`user_data?email=eq.${encodeURIComponent(currentEmail)}&select=data`);
-  if (rows.length > 0 && rows[0].data) {
-    const saved = rows[0].data;
-    // Merge to ensure all keys exist
-    state = { ...getDefaultState(), ...saved };
-    if (!state.exercises) state.exercises = getDefaultState().exercises;
-  } else {
-    state = getDefaultState();
-  }
-}
-
-async function saveUserData() {
+async function saveData() {
+  const creds = getCreds();
+  if (!creds) return;
   setSyncStatus('saving');
   try {
-    // Upsert on email conflict
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/user_data?on_conflict=email`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'resolution=merge-duplicates,return=minimal',
-      },
-      body: JSON.stringify({ email: currentEmail, data: state })
-    });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.message || res.statusText);
-    }
+    await binWrite(creds.key, creds.binId, state);
     setSyncStatus('saved');
   } catch(e) {
-    console.error('Save error:', e);
     setSyncStatus('error');
   }
 }
@@ -447,7 +438,7 @@ async function saveUserData() {
 function scheduleSave() {
   clearTimeout(saveTimer);
   setSyncStatus('saving');
-  saveTimer = setTimeout(saveUserData, 1000);
+  saveTimer = setTimeout(saveData, 1200);
 }
 
 function setSyncStatus(s) {
@@ -459,21 +450,21 @@ function setSyncStatus(s) {
     error:  ['● ERROR',        'error',  'var(--error)'],
   };
   const [txt, cls, dotColor] = map[s];
-  el.textContent  = txt;
-  el.className    = `sync-status ${cls}`;
+  el.textContent = txt;
+  el.className = `sync-status ${cls}`;
   if (dot) dot.style.background = dotColor;
 }
 
 // ─── SHOW APP ─────────────────────────────────────────────────────────────────
 function showApp() {
-  document.getElementById('authScreen').style.display = 'none';
-  document.getElementById('appScreen').style.display  = 'block';
-  document.getElementById('userEmail').textContent    = currentEmail;
+  document.getElementById('setupScreen').style.display = 'none';
+  document.getElementById('appScreen').style.display   = 'block';
   document.getElementById('daysVal').textContent  = state.days;
   document.getElementById('volVal').textContent   = state.volume;
   renderWeekGrid();
   renderExEditor();
   renderWorkouts();
+  setSyncStatus('saved');
 }
 
 // ─── TRAINING CONSTANTS ───────────────────────────────────────────────────────
@@ -531,8 +522,7 @@ function renderExEditor() {
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
         <span class="ex-badge ${grp}">${grp}</span>
         <span style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;">${TYPE_LABELS[grp]}</span>
-      </div>
-    `;
+      </div>`;
     state.exercises[grp].forEach((ex, idx) => {
       const row = document.createElement('div');
       row.className = 'ex-edit-row';
@@ -542,8 +532,7 @@ function renderExEditor() {
           oninput="updateExName('${grp}',${idx},this.value)">
         <input class="max-input" type="number" value="${ex.max}" min="1" max="200"
           onchange="updateExMax('${grp}',${idx},this.value)">
-        <button class="btn-icon" onclick="removeEx('${grp}',${idx})">×</button>
-      `;
+        <button class="btn-icon" onclick="removeEx('${grp}',${idx})">×</button>`;
       group.appendChild(row);
     });
     const addBtn = document.createElement('button');
@@ -632,21 +621,23 @@ function adj(key,delta){
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 async function init() {
-  // If we have a saved email, try auto-login
-  if (currentEmail) {
+  const creds = getCreds();
+  if (creds) {
+    setSetupMsg('Cargando...', 'loading');
+    document.getElementById('setupScreen').style.display = 'flex';
     try {
-      // Verify account still exists
-      const rows = await sbFetch(`accounts?email=eq.${encodeURIComponent(currentEmail)}&select=email`);
-      if (rows.length > 0) {
-        await loadUserData();
-        showApp();
-        return;
-      }
-    } catch(e) {}
-    localStorage.removeItem('tl_email');
-    currentEmail = null;
+      const data = await binRead(creds.key, creds.binId);
+      state = { ...getDefaultState(), ...data };
+      if (!state.exercises) state.exercises = getDefaultState().exercises;
+      showApp();
+      return;
+    } catch(e) {
+      // Credentials might be stale, show setup
+      clearCreds();
+      setSetupMsg('', '');
+    }
   }
-  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('setupScreen').style.display = 'flex';
 }
 
 init();
